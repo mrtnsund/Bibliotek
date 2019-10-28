@@ -7,39 +7,44 @@ function Book(title, author, pages, read){
         this.read = read;
 };
 Book.prototype.info = function () {
-    return this.title + " by " + this.author + ", " + this.pages + " pages, " + this.read;
+    return this.title + " by " + this.author + ", " + this.pages + " pages.";
 };
-let book1 = new Book('Bibelen', 'ukjent', 'too many', 'not read');
-let book2 = new Book('fsdafs', 'ukjent', 'too many', 'not read');
-
+let book1 = new Book('Bibelen', 'ukjent', 'too many', true);
 bibliotek.push(book1);
-bibliotek.push(book2);
-bibliotek.push(book2);
-bibliotek.push(book2);
-
-
 let container = document.getElementById("container");
 let biblioDiv = document.getElementById("bibliotek");
 
 
-for (let i = 0; i < bibliotek.length; i++){
+let i = 0;
+function display(){
+for (i; i < bibliotek.length; i++){
     let element = document.createElement('div');
     element.classList.add("bok");
     element.id = i;
     element.innerHTML = bibliotek[i].info();
-    biblioDiv.appendChild(element);
-}
-let checked = false;
-let knapp = document.getElementById('leggTil');
-knapp.addEventListener('click',  () => {
-    let element = document.createElement('div');
-    element.id = 'nyBok';
 
-    if (!checked){
-    biblioDiv.appendChild(element);
-    checked = true;
-    } else {
-        biblioDiv.removeChild(element);
-        checked = false;
+    var checkbox = document.createElement('input'); 
+    checkbox.type = "checkbox"; 
+
+    if (element.read){
+        checkbox.checked = true;
     }
+    var label = document.createElement('Label'); 
+    label.innerHTML = "Lest";
+    checkbox.appendChild(label);
+    element.appendChild(checkbox);
+    biblioDiv.appendChild(element);
+}};
+
+let leggTilKnapp = document.getElementById("knapp");
+leggTilKnapp.addEventListener('click', () => {
+    let tittel = document.getElementById('tittel').value;
+    let forfatter = document.getElementById('forfatter').value;
+    let antallSider = document.getElementById('sider').value;
+    let newBook = new Book(tittel, forfatter, antallSider, false);
+    bibliotek.push(newBook);
+    display();
 });
+
+display();
+
