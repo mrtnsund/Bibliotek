@@ -1,50 +1,91 @@
-#container {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    padding: 40px;
-    width: 1000px;
-    display:grid;
-    justify-content: center;
-
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+.navbar {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
 }
-.bibliotek {
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-auto-rows: auto;
-    grid-gap: 1rem;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+.navbar h1 {
+    font-weight: 1000;
+}
+.leggTil {
     padding: 10px;
+    height: 120px;
+    width: 600px;
+    margin: 0 auto;
+}
+.bokInfo {
+    position: relative;
+    height: 90px;
+    width: 455px;
+    margin: 0 auto;
+    padding: 10px 0 0 0;
+    letter-spacing: 2px;
+    font-weight: 300;
+    text-align: center;
+}
+.tittel {
+    float:left;
+    width: 150px;
+}
+.forfatter {
+    float:left;
+    width: 150px;
+}
+.sideantall {
+    float:left;
+    width: 150px;
+}
+.leggtilKnapp {
+    display: inline-block;
+    width: 200px;
+    padding: 5px;
+    margin: 5px;
+    border: 0.2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    
+}
+.leggtilKnapp:hover {
     background-color: grey;
-    width: 500px;
-
+    
+}
+.boker {
+    position: relative;
+    width: 605px;
+    margin: 0 auto;    
 }
 .bok {
-    border: 2px solid #e7e7e7;
-    border-radius: 4px;
-    padding: .5rem;
-    background-color: white;
-    height:70px;
-}
-#leggTil {
-    background-color: beige;
-    border: 2px solid #e7e7e7;
-    border-radius: 4px;
-    height: 20px;
-    grid-column-start: 1;
-    grid-column-end: 4;
-}
-#leggTil:hover{
-    background-color:white;
-}
-#nyBok {
-    grid-column-start:1;
-    grid-column-end:4;
-    grid-row-start: 2;
-    grid-row-end: 4;
-    background-color: beige;
+    
     padding: 20px;
+    float:left;
+    width: 195px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 150px;
+    margin: 2px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
+.tittelBok {
+    font-weight: 800;
+}
+.forfatterBok {
+    font-weight: 400;
+}
+.sideantallBok {
+    font-weight: 200;
+}
+.erLest {
+    text-align: center;
+    font-size:14px;
+    width: 80px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 0 auto;
+}
+
 

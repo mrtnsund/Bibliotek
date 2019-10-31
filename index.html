@@ -2,39 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <div id="container">
-        <div class="bibliotek" id="bibliotek">
-            <button id="leggTil">Legg til ny bok</button>
-            <div id="nyBok">
-              <form>
-                <div>
-                    <label for="tittel">Tittel:</label>
-                    <input type="text" id="tittel">
-                  </div>
-                  <div>
-                    <label for="forfatter">Forfatter:</label>
-                    <input type="text" id="forfatter">
-                  </div>
-                  <div>
-                    <label for="sider">Antall sider:</label>
-                    <input type="text" id="sider">
-                  </div>
-                  <button id="knapp" type="button">Legg til</button>
-                </form>
-
-            </div>
-        </div>
-
+  <div>
+    <div class="navbar"><h1>Bibliotek</h1><hr></div>
+    <div class="leggTil">
+      <div class="bokInfo">
+        <div class="tittel">Tittel<br><input type="text" name="tittel"><br></div>
+        <div class="forfatter">Forfatter<br><input type="text" name="forfatter"><br></div>
+        <div class="sideantall">Antall sider<br><input type="text" name="sideantall"><br></div>
+        <div class="leggtilKnapp">Legg til</div>
+      </div>
     </div>
-    <script src='app.js'></script>
+    <div class="boker">
+      <div class="bok">
+        <div class="tittelBok">Tittel på bok</div>
+        <div class="forfatterBok">Forfatteren</div>
+        <div class="sideantallBok">283</div><br><br>
+        <div class="erLest">Er ikke lest</div>
+      </div>
+    </div>
+  </div>
+  <script src='app.js'></script>
 </body>
 
 </html>
