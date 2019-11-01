@@ -21,7 +21,21 @@ Book.prototype.info = function () {
 };
 
 let bibliotek = [];
+getData();
 let biblioDiv = document.getElementById("boker");
+
+function getData() {
+    firebase.database().ref('Boker/').once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var childData = childSnapshot.val();
+            bibliotek.push(new Book(childData.tittel, childData.forfatter, childData.sideantall, childData.read))
+        })
+    })
+}
+function removeData(element){
+    var slettItem = firebase.database().ref('Boker/' + element.id);
+    slettItem.remove();
+}
 
 let i = 0;
 function display() {
@@ -64,6 +78,7 @@ function display() {
         fjern.addEventListener('click', () => {
             bibliotek[element.id] = undefined;
             biblioDiv.removeChild(element);
+            removeData(element);
             display();
         });
 
@@ -79,16 +94,8 @@ function display() {
                 sideantall: bibliotek[i].pages,
                 read: bibliotek[i].read
             });
-            getData();
         }
-        function getData() {
-            firebase.database().ref('Boker/').once('value', function (snapshot) {
-                snapshot.forEach(function (childSnapshot) {
-                    var childData = childSnapshot.val();
-                    console.log(childData)
-                })
-            })
-        }
+
         writeData();
         biblioDiv.appendChild(element);
     }
