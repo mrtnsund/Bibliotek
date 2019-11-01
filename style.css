@@ -88,7 +88,17 @@
     border-radius: 3px;
     margin: 0 auto;
     cursor: pointer;
-
+}
+.fjern {
+    position: aboslute;
+    text-align: center;
+    font-size:14px;
+    width: 80px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 2px auto;
+    cursor: pointer;
 }
 
 
