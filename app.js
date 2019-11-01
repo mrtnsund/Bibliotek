@@ -7,28 +7,20 @@ var firebaseConfig = {
     messagingSenderId: "716961840563",
     appId: "1:716961840563:web:1ffbb9e5d47ef926df5fc6"
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 function Book(title, author, pages, read) {
-
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 };
-Book.prototype.info = function () {
-    return this.title + " by " + this.author + ", " + this.pages + " pages.";
-};
-
-let bibliotek = [];
-let biblioDiv = document.getElementById("boker");
-
 function getData() {
     firebase.database().ref('Boker/').once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
             bibliotek.push(new Book(childData.tittel, childData.forfatter, childData.sideantall, childData.read))
         })
+        display();
     })
 }
 function removeData(element){
@@ -36,19 +28,21 @@ function removeData(element){
     slettItem.remove();
 }
 
+let bibliotek = [];
+let biblioDiv = document.getElementById("boker");
 let i = 0;
 function display() {
     for (i; i < bibliotek.length; i++) {
+
         let element = document.createElement('div');
-        element.classList.add("bok");
-        element.id = i;
         let tittel = document.createElement('div');
         let forfatter = document.createElement('div');
         let sidetall = document.createElement('div');
         let erLest = document.createElement('div');
         let fjern = document.createElement('div');
-        erLest.style.backgroundColor = "rgba(255,0,0,0.4)";
-        erLest.innerHTML = "Er ikke lest";
+
+        element.classList.add("bok");
+        element.id = i;
 
         tittel.classList.add("tittelBok");
         forfatter.classList.add("forfatterBok")
@@ -56,9 +50,12 @@ function display() {
         erLest.classList.add("erLest");
         fjern.classList.add("fjern");
 
+        
         tittel.innerHTML = bibliotek[i].title;
         forfatter.innerHTML = bibliotek[i].author;
         sidetall.innerHTML = bibliotek[i].pages;
+        erLest.innerHTML = "Er ikke lest";
+        erLest.style.backgroundColor = "rgba(255,0,0,0.4)";
         fjern.innerHTML = "Fjern";
 
         
@@ -74,13 +71,13 @@ function display() {
             }
             display();
         });
+
         fjern.addEventListener('click', () => {
-            bibliotek[element.id] = undefined;
+            bibliotek.splice(element.id, 1);
             biblioDiv.removeChild(element);
             removeData(element);
             display();
         });
-
         element.appendChild(tittel);
         element.appendChild(forfatter);
         element.appendChild(sidetall);
