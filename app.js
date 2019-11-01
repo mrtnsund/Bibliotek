@@ -21,7 +21,6 @@ Book.prototype.info = function () {
 };
 
 let bibliotek = [];
-getData();
 let biblioDiv = document.getElementById("boker");
 
 function getData() {
@@ -95,7 +94,6 @@ function display() {
                 read: bibliotek[i].read
             });
         }
-
         writeData();
         biblioDiv.appendChild(element);
     }
@@ -110,5 +108,5 @@ leggTilKnapp.addEventListener('click', () => {
     bibliotek.push(newBook);
     display();
 });
-
 display();
+getData();
