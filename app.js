@@ -1,25 +1,34 @@
-let bibliotek = [];
+var firebaseConfig = {
+    apiKey: "AIzaSyBJ1MshxX3RLdEgHvPiXz7WiXvWZSpCgXM",
+    authDomain: "bibliotek-27ae5.firebaseapp.com",
+    databaseURL: "https://bibliotek-27ae5.firebaseio.com",
+    projectId: "bibliotek-27ae5",
+    storageBucket: "bibliotek-27ae5.appspot.com",
+    messagingSenderId: "716961840563",
+    appId: "1:716961840563:web:1ffbb9e5d47ef926df5fc6"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+function Book(title, author, pages, read) {
 
-function Book(title, author, pages, read){
-    
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
 };
 Book.prototype.info = function () {
     return this.title + " by " + this.author + ", " + this.pages + " pages.";
 };
 
-
+let bibliotek = [];
 let biblioDiv = document.getElementById("boker");
 
 let i = 0;
-function display(){
-    for (i; i < bibliotek.length; i++){
+function display() {
+    for (i; i < bibliotek.length; i++) {
         let element = document.createElement('div');
         element.classList.add("bok");
-        element.id=i;
+        element.id = i;
         let tittel = document.createElement('div');
         let forfatter = document.createElement('div');
         let sidetall = document.createElement('div');
@@ -39,8 +48,9 @@ function display(){
         sidetall.innerHTML = bibliotek[i].pages;
         fjern.innerHTML = "Fjern";
 
+        
         erLest.addEventListener('click', () => {
-            if(bibliotek[element.id].read === false){
+            if (bibliotek[element.id].read === false) {
                 bibliotek[element.id].read = true;
                 erLest.style.backgroundColor = "rgba(255,0,0,0.4)";
                 erLest.innerHTML = "Er ikke lest";
@@ -62,6 +72,24 @@ function display(){
         element.appendChild(sidetall);
         element.appendChild(erLest);
         element.appendChild(fjern);
+        function writeData() {
+            firebase.database().ref('Boker/' + i).set({
+                tittel: bibliotek[i].title,
+                forfatter: bibliotek[i].author,
+                sideantall: bibliotek[i].pages,
+                read: bibliotek[i].read
+            });
+            getData();
+        }
+        function getData() {
+            firebase.database().ref('Boker/').once('value', function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    var childData = childSnapshot.val();
+                    console.log(childData)
+                })
+            })
+        }
+        writeData();
         biblioDiv.appendChild(element);
     }
 };

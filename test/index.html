@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Test</h1>
+    <p id="data"></p>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBJ1MshxX3RLdEgHvPiXz7WiXvWZSpCgXM",
+            authDomain: "bibliotek-27ae5.firebaseapp.com",
+            databaseURL: "https://bibliotek-27ae5.firebaseio.com",
+            projectId: "bibliotek-27ae5",
+            storageBucket: "bibliotek-27ae5.appspot.com",
+            messagingSenderId: "716961840563",
+            appId: "1:716961840563:web:1ffbb9e5d47ef926df5fc6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+            function writeData(){
+                firebase.database().ref("User").set({
+                    name: "Morten",
+                    age: "23"
+                });
+                getData();
+            }
+            writeData();
+            
+
+            function getData(){
+                firebase.database().ref('/').once('value', function(snapshot) {
+                    snapshot.forEach(function(childSnapshot){
+                        var childKey = childSnapshot.key;
+                        var childData = childSnapshot.val();
+                        document.getElementById('data').innerHTML = childData['name'] + ", " + childData['age'];
+                    })
+                })
+            }
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
