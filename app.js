@@ -8,11 +8,13 @@ var firebaseConfig = {
     appId: "1:716961840563:web:1ffbb9e5d47ef926df5fc6"
 };
 firebase.initializeApp(firebaseConfig);
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 };
 function getData() {
     firebase.database().ref('Boker/').once('value', function (snapshot) {
